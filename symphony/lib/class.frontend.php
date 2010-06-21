@@ -193,19 +193,6 @@
 
 				if(!(self::$view instanceof View)) throw new Exception('Page not found');
 
-				if(!Frontend::instance()->isLoggedIn() && in_array('admin', self::$view->types)){
-
-					$views = View::findFromType('403');
-					self::$view = array_shift($views);
-
-					if(!(self::$view instanceof View)){
-						throw new SymphonyErrorPage(
-							__('Please <a href="%s">login</a> to view this page.', array(ADMIN_URL . '/login/')),
-							__('Forbidden'), NULL,
-							array('HTTP/1.0 403 Forbidden')
-						);
-					}
-				}
 			}
 
 			catch(Exception $e){

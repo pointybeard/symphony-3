@@ -57,18 +57,7 @@
 			
 			$bits = preg_split('/\//', trim($page, '/'), 3, PREG_SPLIT_NO_EMPTY);
 			
-			if($bits[0] == 'login'){
-				array_shift($bits);
-				
-				$callback = array(
-					'driver' => 'login',
-					'context' => preg_split('/\//', implode('/', $bits), -1, PREG_SPLIT_NO_EMPTY),
-					'classname' => 'contentLogin',
-					'pageroot' => '/login/'
-				);
-			}
-			
-			elseif($bits[0] == 'extension' && isset($bits[1])){
+			if($bits[0] == 'extension' && isset($bits[1])){
 				
 				$extention_name = $bits[1];
 				$bits = preg_split('/\//', trim($bits[2], '/'), 2, PREG_SPLIT_NO_EMPTY);
@@ -189,28 +178,21 @@
 			self::$Headers->append('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
 			self::$Headers->append('Cache-Control', 'no-cache, must-revalidate, max-age=0');
 			self::$Headers->append('Pragma', 'no-cache');
-			
-			$this->isLoggedIn();
-			
+
 			if(empty($page)){
+
+				$section_handle = $this->User->default_section;
 				
-				if (!$this->isLoggedIn()) {
-					$page = '/login';
+				// Make sure section exists:
+				try {
+					$section = Section::loadFromHandle($section_handle);
+					redirect(ADMIN_URL . "/publish/{$section_handle}/");
 				}
 				
-				else {
-					$section_handle = $this->User->default_section;
-					
-					// Make sure section exists:
-					try {
-						$section = Section::loadFromHandle($section_handle);
-						redirect(ADMIN_URL . "/publish/{$section_handle}/");
-					}
-					
-					catch (Exception $e) {
-						redirect(ADMIN_URL . '/blueprints/sections/');
-					}
+				catch (Exception $e) {
+					redirect(ADMIN_URL . '/blueprints/sections/');
 				}
+				
 			}
 			
 			if(!$this->_callback = $this->getPageCallback($page)){
@@ -233,20 +215,7 @@
 			# Global: Yes
 			Extension::notify('AdminPagePreBuild', '/administration/', array('page' => &$this->Page, 'callback' => &$this->_callback));
 
-			if(!$this->isLoggedIn() && $this->_callback['driver'] != 'login'){
-				if(is_callable(array($this->Page, 'handleFailedAuthorisation'))) $this->Page->handleFailedAuthorisation();
-				else{
-				
-					include_once(CONTENT . '/content.login.php');
-					$this->Page = new contentLogin;
-					$this->Page->build();
-				
-				}
-			}
-			
-			else{
-				$this->Page->build($this->_callback['context']);
-			}
+			$this->Page->build($this->_callback['context']);
 			
 			####
 			# Delegate: AdminPagePreGenerate

@@ -190,7 +190,7 @@
 		}
 
 		public function appendSession(){
-
+/*
 			$ul = $this->createElement('ul');
 			$ul->setAttribute('id', 'session');
 
@@ -211,7 +211,7 @@
 			# Description: Add new list elements to the footer
 			Extension::notify('AddElementToFooter', '/administration/', array('wrapper' => &$ul));
 
-			$this->Form->appendChild($ul);
+			$this->Form->appendChild($ul);*/
 		}
 
 		public function appendSubheading($string, $link=NULL){

@@ -29,11 +29,11 @@
 	</group>
 
 	<group name="System" index="100" type="links" align="right">
-		<children>
+		<children><!--
 			<item link="/system/users/" name="Users" />
 			<item link="/system/users/edit/" name="User Edit" visible="no" />
 			<item link="/system/users/new/" name="User New" visible="no"  />
-			
+			-->
 			<item link="/system/settings/" name="Settings" />
 			
 			<item link="/system/extensions/" name="Extensions" />

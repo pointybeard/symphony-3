@@ -6,7 +6,7 @@
 	require_once('class.configuration.php');
 	require_once('class.datetimeobj.php');
 	require_once('class.log.php');
-	require_once('class.cookie.php');
+	//require_once('class.cookie.php');
 	require_once('interface.singleton.php');
 	require_once('class.cache.php');
                  
@@ -14,7 +14,7 @@
 	require_once('class.view.php');
 	require_once('class.widget.php');
 	require_once('class.general.php');
-	require_once('class.user.php');
+	//require_once('class.user.php');
 	require_once('class.xslproc.php');
                  
 	require_once('class.extension.php');
@@ -128,8 +128,8 @@
 
 		protected static $_lang;
 
-		public $Cookie;
-		public $User;
+		//public $Cookie;
+		//public $User;
 
 		protected static $_instance;
 
@@ -151,7 +151,7 @@
 			GenericExceptionHandler::initialise();
 			GenericErrorHandler::initialise(self::$Log);
 
-			$this->initialiseCookie();
+			//$this->initialiseCookie();
 
 			$this->initialiseDatabase();
 			
@@ -166,7 +166,7 @@
 		public function lang(){
 			return self::$_lang;
 		}
-		
+		/*
 		public function initialiseCookie(){
 			try{
 				$cookie_path = parse_url(URL, PHP_URL_PATH);
@@ -181,7 +181,7 @@
 
 			$this->Cookie = new Cookie(__SYM_COOKIE_PREFIX__, TWO_WEEKS, __SYM_COOKIE_PATH__);
 		}
-
+*/
 		public static function Configuration(){
 			return self::$Configuration;
 		}
@@ -241,7 +241,7 @@
 			}
 
 		}
-
+/*
 		public function isLoggedIn(){
 
 			if ($this->User) return true;
@@ -417,6 +417,7 @@
 				}
 			}
 		}
+*/
 	}
 
 	return 'Symphony';
