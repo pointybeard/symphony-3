@@ -10,3 +10,6 @@
 [submodule "extensions/jit_image_manipulation"]
 	path = extensions/jit_image_manipulation
 	url = git://github.com/pointybeard/jit_image_manipulation.git
+[submodule "extensions/uac"]
+	path = extensions/uac
+	url = git@github.com:pointybeard/User-Access-Control.git
