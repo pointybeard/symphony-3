@@ -179,6 +179,11 @@
 			self::$Headers->append('Cache-Control', 'no-cache, must-revalidate, max-age=0');
 			self::$Headers->append('Pragma', 'no-cache');
 
+			####
+			# Delegate: AdminPagePreResolve
+			# Description: Call has just been made to the Display function. Allows manipulation of the $page value
+			Extension::notify('AdminPagePreResolve', '/administration/', array('page' => &$page));
+
 			if(empty($page)){
 
 				$section_handle = $this->User->default_section;
