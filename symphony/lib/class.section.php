@@ -385,7 +385,7 @@
 			if ($simulate) return true;
 
 			$section->sanitizeLayout();
-
+			
 			return file_put_contents($pathname, (string)$section);
 		}
 
@@ -456,7 +456,7 @@
 					);
 					
 					$old[$field->guid] = (object)array(
-						'label'		=> $field->label,
+						'label'		=> $field->name,
 						'field'		=> $field
 					);
 				}
@@ -475,7 +475,7 @@
 				);
 				
 				$new[$field->guid] = (object)array(
-					'label'		=> $field->label,
+					'label'		=> $field->name,
 					'field'		=> $field
 				);
 			}
@@ -808,7 +808,13 @@
 		}
 
 		public function __toString(){
-			return $this->toDoc()->saveXML();
+			try{
+				return $this->toDoc()->saveXML();
+			}
+			catch(Exception $e){
+				var_dump($e);
+				die();
+			}
 		}
 
 		/*public function __toString(){

@@ -230,7 +230,7 @@
 						$fields[] = array(
 							$section->handle . '::' .$field->{'element-name'},
 							(isset($this->{'related-fields'}["{$section->handle}::" . $field->{'element-name'}])),
-							$field->label
+							$field->name
 						);
 					}
 				}
